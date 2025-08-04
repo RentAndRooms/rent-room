@@ -1,0 +1,29 @@
+65d4da75 (HEAD -> main, origin/main) footer three error fixed
+043bf423 footer four error fixed
+fe84046c change name, type to package name and property name
+ce3e7b11 fixed package edit problem
+9b0fafc8 add sql file
+dead2d88 change ghorermenu url
+6ccb0da7 Single signed in feature added
+59a6422e fixed package url not found issue when partner create package
+c7e885b4 change sign up to create account
+e62c5620 filter above package in all packages page
+78396cce show admenities and maintains fee
+0c511abb work on payment logic
+152d96a0 add bikash nogod rocket to user dashboard
+6c51c92b add rocket payment method
+a531b199 put hero style in app.blade.php file
+8759dc67 change hero title font size and color
+c80158d7 replace pound sign with taka sign in entire project
+cb45eeca manual bikash and nogod added
+4179e468 change /login to /test in facebookcontroller
+42899ac8 testing payment complete success page
+505d5974 testing payment gateway integration done
+e09aa885 add .gitignore file
+61dcbb6c fixed datetimepicker at booking
+355f8c7f redirect and name issue fixed while booking
+74dbb1b9 fixed booking without email
+d66b8f54 image not come on above video issue fixed
+4cf6db91 make seach button work in landing page
+2c3a4e2d swap local area with select accomodation type
+7ab3390a skip
