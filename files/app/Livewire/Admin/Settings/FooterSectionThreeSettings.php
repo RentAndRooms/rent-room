@@ -33,7 +33,7 @@ class FooterSectionThreeSettings extends Component
         ]);
 
         FooterSectionThree::create([
-            'footer_id' => $this->footerId,
+            'footer_id' => 1,
             'title' => $this->newTitle,
             'link' => $this->newLink,
         ]);
