@@ -26,12 +26,12 @@
                                             </div>
                                         </div>
                                     @else
-                                        <p class="text-gray-700 text-sm text-md-base mb-2">{{ $key }})
-                                            {{ $content }}</p>
+                                        <p class="text-gray-700 text-sm text-md-base mb-2">{{ $key }}
+                                            {!! $content !!} </p>
                                     @endif
                                 @endforeach
                             @else
-                                <p class="text-gray-700 text-sm text-md-base">{{ $term->content }}</p>
+                               {!! $term->content !!}
                             @endif
                         </div>
                     </div>
