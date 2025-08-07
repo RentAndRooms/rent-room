@@ -14,7 +14,7 @@
 
         <div class="form-group mt-3">
             <label for="content">Content</label>
-            <textarea class="form-control" id="content" wire:model="content" style="height: 200px;"></textarea>
+            <textarea class="form-control" id="tinymce-editor" wire:model="content" style="height: 200px;"></textarea>
             @error('content') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         
