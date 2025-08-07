@@ -5,9 +5,9 @@
                 <div class="col-md-6 col-lg-4 mb-6 mb-md-0">
                     <h4 class="text-white fs-16 my-4 font-weight-500">Contact Us</h4>
                     <div class="lh-26 font-weight-500">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex">
                             <span class="mr-2">
-                                <i class="fas fa-location-circle fa-2x"></i>
+                                <i class="fas fa-location-circle fa-2x" style="font-size: 1.2em;"></i>
                             </span>
                             <span class="mb-0">{{$footer?->address}}</span>
                         </div>
@@ -22,7 +22,7 @@
                         @if($footer && $footer?->contact_number)
                         <a class="d-flex align-items-center text-muted hover-white mb-2" href="tel:{{ preg_replace('/[^0-9+]/', '', $footer?->contact_number) }}">
                             <span class="mr-2">
-                                <i class="fas fa-phone-alt fa-1x"></i>
+                                <i class="fas fa-phone-alt fa-1x" style="font-size: 1.2em;"></i>
                             </span>
                             <span>{{ $footer?->contact_number }}</span>
                         </a>
@@ -30,7 +30,7 @@
 
                         <a href="https://wa.me/+07777955040" class="d-flex align-items-center text-muted hover-white" href="/">
                             <span class="mr-2">
-                                <i class="fab fa-whatsapp-square fa-2x"></i>
+                                <i class="fab fa-whatsapp-square fa-2x" style="font-size: 1.2em;"></i>
                             </span>
                             <span>{{$footer?->website}}</span>
                         </a>
