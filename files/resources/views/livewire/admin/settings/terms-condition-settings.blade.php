@@ -12,11 +12,12 @@
             @error('title') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="form-group mt-3">
+        <div class="form-group mt-3" wire:ignore>
             <label for="content">Content</label>
-            <textarea class="form-control" id="tinymce-editor" wire:model="content" style="height: 200px;"></textarea>
+            <textarea class="form-control" id="tinymce-editor" wire:model="content" style="height: 200px;">{{ $content }}</textarea>
             @error('content') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
+        
         
 
         <button type="submit" class="btn btn-primary mt-3">{{ $isEdit ? 'Update' : 'Save' }}</button>

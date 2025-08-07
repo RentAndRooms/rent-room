@@ -607,57 +607,50 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
+   <script>
+    function initTinyMCE() {
+        // Remove existing TinyMCE instance to prevent duplicates
+        tinymce.remove('#tinymce-editor');
+
+        tinymce.init({
+            selector: '#tinymce-editor',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            menubar: false,
+            height: 400,
+            content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }',
+            setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save(); // Sync TinyMCE content to textarea
+                });
+
+                editor.on('init', function () {
+                    const textarea = document.getElementById('tinymce-editor');
+                    if (textarea && textarea.value) {
+                        editor.setContent(textarea.value); // Set initial content
+                    }
+                });
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initTinyMCE();
+    });
+
+    // Reinitialize TinyMCE after Livewire updates
+    Livewire.hook('element.updated', (el, component) => {
+        if (el.id === 'tinymce-editor') {
             initTinyMCE();
-        });
-
-        // Initialize TinyMCE
-        function initTinyMCE() {
-            tinymce.init({
-                selector: '#tinymce-editor',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                menubar: false,
-                height: 400,
-                content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }',
-                setup: function (editor) {
-                    editor.on('change', function () {
-                        // Update Livewire component using wire:model.live
-                        const textarea = document.getElementById('tinymce-editor');
-                        if (textarea) {
-                            textarea.value = editor.getContent();
-                            textarea.dispatchEvent(new Event('input', { bubbles: true }));
-                        }
-                    });
-                    
-                    // Handle Livewire updates
-                    editor.on('init', function () {
-                        const textarea = document.getElementById('tinymce-editor');
-                        if (textarea && textarea.value) {
-                            editor.setContent(textarea.value);
-                        }
-                    });
-                }
-            });
         }
+    });
 
-        // Reinitialize TinyMCE after Livewire updates
-        document.addEventListener('livewire:navigated', function () {
-            tinymce.remove('#tinymce-editor');
-            setTimeout(function() {
-                initTinyMCE();
-            }, 100);
-        });
+    // Handle manual reinitialization if needed
+    document.addEventListener('reinit-tinymce', function () {
+        initTinyMCE();
+    });
+</script>
 
-        // Custom event for reinitializing TinyMCE
-        document.addEventListener('reinit-tinymce', function () {
-            tinymce.remove('#tinymce-editor');
-            setTimeout(function() {
-                initTinyMCE();
-            }, 100);
-        });
-    </script>
     <!-- Vendors scripts -->
     <script src="{{ asset('vendors/jquery.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
