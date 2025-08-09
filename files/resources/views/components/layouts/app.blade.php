@@ -607,49 +607,60 @@
             </div>
         </div>
     </div>
-   <script>
-    function initTinyMCE() {
-        // Remove existing TinyMCE instance to prevent duplicates
-        tinymce.remove('#tinymce-editor');
 
-        tinymce.init({
-            selector: '#tinymce-editor',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            menubar: false,
-            height: 400,
-            content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }',
-            setup: function (editor) {
-                editor.on('change', function () {
-                    editor.save(); // Sync TinyMCE content to textarea
-                });
+    @livewireScripts
 
-                editor.on('init', function () {
-                    const textarea = document.getElementById('tinymce-editor');
-                    if (textarea && textarea.value) {
-                        editor.setContent(textarea.value); // Set initial content
-                    }
-                });
-            }
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        initTinyMCE();
-    });
-
-    // Reinitialize TinyMCE after Livewire updates
-    Livewire.hook('element.updated', (el, component) => {
-        if (el.id === 'tinymce-editor') {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             initTinyMCE();
-        }
-    });
+        });
 
-    // Handle manual reinitialization if needed
-    document.addEventListener('reinit-tinymce', function () {
-        initTinyMCE();
-    });
-</script>
+        // Initialize TinyMCE
+        function initTinyMCE() {
+            tinymce.init({
+                selector: '#tinymce-editor',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                menubar: false,
+                height: 400,
+                content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }',
+                setup: function (editor) {
+                    editor.on('change', function () {
+                        // Update Livewire component using wire:model.live
+                        const textarea = document.getElementById('tinymce-editor');
+                        if (textarea) {
+                            textarea.value = editor.getContent();
+                            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+                        }
+                    });
+                    
+                    // Handle Livewire updates
+                    editor.on('init', function () {
+                        const textarea = document.getElementById('tinymce-editor');
+                        if (textarea && textarea.value) {
+                            editor.setContent(textarea.value);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Reinitialize TinyMCE after Livewire updates
+        document.addEventListener('livewire:navigated', function () {
+            tinymce.remove('#tinymce-editor');
+            setTimeout(function() {
+                initTinyMCE();
+            }, 100);
+        });
+
+        // Custom event for reinitializing TinyMCE
+        document.addEventListener('reinit-tinymce', function () {
+            tinymce.remove('#tinymce-editor');
+            setTimeout(function() {
+                initTinyMCE();
+            }, 100);
+        });
+    </script>
 
     <!-- Vendors scripts -->
     <script src="{{ asset('vendors/jquery.min.js') }}"></script>
@@ -670,6 +681,8 @@
     <script src="{{ asset('vendors/dataTables/jquery.dataTables.min.js') }}"></script>
     <!-- Theme scripts -->
     <script src="{{ asset('js/theme.js') }}"></script>
+
+    @stack('scripts')
 
 
     <script>
@@ -768,7 +781,7 @@
                                         Lost password?
                                     </a>
                                 </div>
-                                <div class="d-flex p-2 border re-capchar align-items-center mb-4">
+                                <!-- <div class="d-flex p-2 border re-capchar align-items-center mb-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="verify" name="verify">
@@ -779,7 +792,7 @@
                                     <a href="#" class="d-inline-block ml-auto">
                                         <img src="images/re-captcha.png" alt="Re-capcha">
                                     </a>
-                                </div>
+                                </div> -->
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
                             </form>
                             <div class="divider text-center my-2">
@@ -793,11 +806,11 @@
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </div>
-                                <div class="col-4 px-2 mb-4">
+                                <!-- <div class="col-4 px-2 mb-4">
                                     <a href="#" class="btn btn-lg btn-block google px-0">
                                         <img src="images/google.png" alt="Google">
                                     </a>
-                                </div>
+                                </div> -->
                                 <div class="col-4 px-2 mb-4">
                                     <a href="#" class="btn btn-lg btn-block twitter text-white px-0">
                                         <i class="fab fa-twitter"></i>
@@ -861,11 +874,11 @@
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </div>
-                                <div class="col-4 px-2 mb-4">
+                                <!-- <div class="col-4 px-2 mb-4">
                                     <a href="#" class="btn btn-lg btn-block google px-0">
                                         <img src="images/google.png" alt="Google">
                                     </a>
-                                </div>
+                                </div> -->
                                 <div class="col-4 px-2 mb-4">
                                     <a href="#" class="btn btn-lg btn-block twitter text-white px-0">
                                         <i class="fab fa-twitter"></i>
