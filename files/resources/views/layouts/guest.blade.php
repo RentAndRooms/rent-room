@@ -148,6 +148,7 @@
                         <!-- Main Navigation Content -->
                         <div class="collapse navbar-collapse" id="navbarContent">
                             <div class="d-lg-flex align-items-center w-100">
+                                @auth
                                 <!-- Rapid Handyworks Link -->
                                 <div class="nav-item d-lg-flex align-items-center mr-lg-4 py-2 py-lg-0">
                                     <a href="{{ route('sso.ghorermenu') }}" target="_blank" rel="noopener noreferrer"
@@ -157,6 +158,7 @@
                                         <i class="fas fa-external-link-alt ml-1" style="font-size: 12px;"></i>
                                     </a>
                                 </div>
+                                @endauth
 
                                 <!-- Right Side Items -->
                                 <div class="d-lg-flex align-items-center ml-lg-auto">
