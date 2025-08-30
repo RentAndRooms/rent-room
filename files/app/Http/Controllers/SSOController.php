@@ -20,12 +20,12 @@ class SSOController extends Controller
     ];
 
     // Generate signature manually
-    $url = 'https://ghorermenu.com/sso-login';
-    $query = http_build_query($data);
-    $signature = hash_hmac('sha256', $url . '?' . $query, config('app.key'));
+      $url = 'https://ghorermenu.com/sso-login';
+      $query = http_build_query($data);
+      $signature = hash_hmac('sha256', $url . '?' . $query, config('app.key'));
 
-    $signedUrl = $url . '?' . $query . '&signature=' . $signature;
+      $signedUrl = $url . '?' . $query . '&signature=' . $signature;
 
-    return redirect()->away($signedUrl);
+      return redirect()->away($signedUrl);
     }
 }
