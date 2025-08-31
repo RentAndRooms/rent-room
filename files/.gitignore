@@ -4,6 +4,7 @@
 .env
 Homestead.yaml
 Homestead.json
+!/storage/app/**
 .phpunit.result.cache
 .idea
 *.log
